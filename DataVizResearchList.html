@@ -6,41 +6,73 @@
 		<!-- This is a list of my online resources on Vietnamese refugees in China -->
 		<title>My online resource list</title>
 		
-		<style>
-		/*This is a CSS class for the main headline on the webpage and has been applied uniformly
-		 to all sour article divisions in the body*/
-			.Topic{
-			font-family"Bodoni MT Black";
-			font-size:30px;
-			color:#FF5233;
-			}
-		/*This is a CSS class for the titles of every article, applied uniformly
-		 to all four article divisions in the body*/					
-			a.Heading{
-				font-family:Helvetica;
-				font-size:20px;
-				font-style:inherit;
-			}
-		/*This is a CSS class for the image properties for the featured images of each article
-		 applied uniformly to all four article divisions in the body*/		
-			img{
-				max-width:100%;
-				width:500px; 
-				border:double line 1px #000000;															
-			}
-		/*This is a CSS class to define the width of the featured images in every article
-		 applied uniformly to all four article divisions in the body*/
-			.ImgBorder{
-				width:500px;
-			}
-		</style>
-			
+		<!--Use HTML tags to refer to the CSS written on another file named styles.css --> 
+		<link rel="stylesheet" href="style.css" />
+		
+		<!--Load the code from https://developers.google.com/chart/interactive/docs/quick_start --!>
+		 <!--Load the Javascript code from Google Visualizations library-->
+   	 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
+   		<script type="text/javascript">
+
+     	 /* Got to the google library and search for charts and execute "load". 
+     	  * This will load the "current" version of the Visualization API, and the corechart list in the package.*/
+      	google.charts.load('current', {'packages':['corechart']});
+
+      /*Since, the code being loaded takes time,
+       *This function is used to tell the page to only make teh chart once teh code loads completely.*/
+      
+      google.charts.setOnLoadCallback(drawChart);
+
+      /*When the code has been loaded, 
+       * Execute the function below to draw the bar chart*/
+      function drawChart() {
+
+      /*Use the  Google library to create the visualization
+       *Make a data table with variable name Vietnamese Refugees who settled in Australia to tabulate the names*/
+        var ColumnChartData = new google.visualization.DataTable();
+        
+      /*Add a column of string type, labeled "Year" as the X-Axis represents the years of refugee intake from 1975-82
+       *Add a column of number type, labeled "Number of Vietnamese Refugees in Australia" as the Y-Axis 
+        which represents the number of refugees who came to Australia from 1975 to 1982 */
+        ColumnChartData.addColumn('string', 'Year');
+        ColumnChartData.addColumn('number', 'Number of Refugees');
+        
+      /*Add rows to the columns which contain the actual values of the string and number mentioned above 
+       *The rows is a list of lists, with each item int he list having the same number of elements as in the row,
+       * with matching data types as defined in the addColumn function defined above.
+       */
+        ColumnChartData.addRows([
+          ['1975', 1069], 
+          ['1976', 194], 
+          ['1977', 1490], 
+          ['1978', 7579], 
+          ['1979', 12392],
+          ['1980', 12588],
+          ['1981', 12245],
+          ['1982', 8154],
+        ]);
+
+        /*Customize the Column bar chart to add title, width and height*/
+        var DesignChart = {'title':'Number of Vietnamese Refugees in Australia',
+                       'width':500,
+                       'height':400,
+                       };
+
+        /* Create a variable that will call the data being fed in the columns and rows of the column chart */
+        var OutputChart = new google.visualization.ColumnChart(document.getElementById('ChartPlacement'));
+        
+        /*Execute the column chart*/ 
+        OutputChart.draw(ColumnChartData, DesignChart);
+      }
+     </script>					
 	</head>
 	
 	<body>
 		<!-- This is the name of the webpage created to list the resources for an assignment on Vietnamese refugees in China
 			The headline of the topic has been styled in font Bodoni HT Black with a size of 30px in red color-->	
 		<h1 class = "Topic"> Resources on Vietnamese Refugees in China </h1> 
+		<!--Add a div under header to create space for the column chart -->
+		<div id="ChartPlacement"> </div>
 		<div>
 			<br> 
 			<!-- Create a line break -->
@@ -54,7 +86,7 @@
 					How Europe can learn from the hard lessons of Hong Kong's Vietnamese refugee crisis
 				</a>
 				<!-- Close the div for the headline here -->
-			</div>
+			</div>			
 			<!-- Start a division for the image here --> 
 			<!-- USe a CSS class for the image size 500px -->
 			<div class = "ImgBorder">
@@ -124,75 +156,8 @@
 			<!-- Close the division for the fourth division here -->
 		</div>
 		
-		
-		<script> 
-		/* Start the JavasScript tag here. The following entails details about Vietnamese refugees in China based on secondary research*/
-		 
-			/*Number of Vietnamese refugees who fled to China by the end of 1979 */
-			var VietnamRefugeesInChina = 250000;
-			
-			/*The first Diplomatic Action taken in 1979 to resettle refugees from China, Hong Kong and other South East Asian countries to Western countries, also referred to as "third countries"*/
-			var FirstDiplomaticActionforRepatriation = "Orderly Departure Program";
-			
-			/*If the Vietnamese refugees resettled in China, then true*/
-			var ResettlementInChina = true;
-			
-			/*Third countries where the refugees were repatriated to*/
-			var ListOfThirdCountries = ["USA","Canada","Australia","France","United Kingdom", "Germany"];
-											
-											
-			/*A summary of the international agreements brokered between countries and/or international organizations to address the Vietnamese influx in China. 
-			 The following contains details of each agreement during the Indochina refugee crisis, from 1975, when the refugee influx to China stareed to 2000,
-			 the year that UNHCR states as the end of the Vietnamese influx to its neighboring as well as western countries.
-			 Each agreement contains five properties inlcuding name, year, brokered by, solution arrived at and the scale of people impacted by the same. 
-			 The scale here represents the number of people who were resttled, repatriated or integrated in China, Hong Kong, or third countries. */								
-											
-			var International_Response = [{
-				"Name":"Operation New Arrivals",
-				"Year":"1975",
-				"Brokered by":"United States of America",
-				"Solution":"Resettlement",
-				"Scale":"130000"
-				},
-				{
-				"Name":"Oderly Departure Program",
-				"Year":"1979",
-				"Brokered by":"UNHCR",
-				"Solution":"Repatriation",
-				"Scale":"650000"	
-				},
-				{
-				"Name":"Comprehensive Plan of Action",
-				"Year":"1989",
-				"Brokered by":"UNHCR",
-				"Solution":"Asylum Seekers",
-				"Scale":"70000"
-			    },
-			    {
-			    "Name":"Orderly Return Program",
-				"Year":"1991",
-				"Brokered by":"UK, Hong Kong, Vietnam",
-				"Solution":"Repatriation",
-				"Scale":"109000"
-			    }
-				]
-				
-			/* Goal: Go through every item in my International_Response list and print to the console everytime I find one
-			 * Whose solution was Repatriation */			
-			for (var counter=0;counter <International_Response.length; counter++){
-			/*Create a unique variable name to set it to the counter rate of the object being looked at*/
-			 	var Desired_Solution = International_Response[counter];			 
-			/*Use a conditonal if to test if the object has "Repatriation" as the "solution" property
-			 *If it does, print the object
-			 *If it does not, print "NotRepatriation"*/
-				if(Desired_Solution.Solution == "Repatriation"){
-					console.log(Desired_Solution);
-				}else{
-					console.log("NotRepatriation");
-				}				
-			}								
-		/*Close the script tag*/
-		</script>
+		<!-- Refactor Javascript to link it to a separate file that contains the Javascript code --> 
+		<script src="script.js" type="text/javascript"></script>
 		
 		<!-- Close body here -->
 	</body>
