@@ -1,0 +1,31 @@
+/*This is a CSS class for the main headline on the webpage and has been applied uniformly
+ to all sour article divisions in the body*/
+.Topic {font-family"Bodoni MT Black";
+	font-size: 30px;
+	color: #FF5233;
+}
+/*This is a CSS class for the titles of every article, applied uniformly
+ to all four article divisions in the body*/
+a.Heading {
+	font-family: Helvetica;
+	font-size: 20px;
+	font-style: inherit;
+}
+/*This is a CSS class for the image properties for the featured images of each article
+ applied uniformly to all four article divisions in the body*/
+img {
+	max-width: 100%;
+	width: 500px;
+	border: double line 1px #000000;
+}
+/*This is a CSS class to define the width of the featured images in every article
+ applied uniformly to all four article divisions in the body*/
+.ImgBorder {
+	width: 500px;
+}
+/*Define the properties of the div which will encompass the visualization*/
+#ChartDivProperties{
+	width: 1000px;
+	height: 700px;
+	color: #eeeeee;
+}
