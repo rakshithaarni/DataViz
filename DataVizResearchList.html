@@ -9,6 +9,10 @@
 		<!--Use HTML tags to refer to the CSS written on another file named styles.css --> 
 		<link rel="stylesheet" href="style.css" />
 		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		
 		<!--Load the code from https://developers.google.com/chart/interactive/docs/quick_start --!>
 		 <!--Load the Javascript code from Google Visualizations library-->
    	 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
@@ -21,7 +25,13 @@
       /*Since, the code being loaded takes time,
        *This function is used to tell the page to only make teh chart once teh code loads completely.*/
       
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawAllCharts);
+      
+      function drawAllCharts(){
+      	
+      	drawChart();
+      	drawChart2();
+      }
 
       /*When the code has been loaded, 
        * Execute the function below to draw the bar chart*/
@@ -63,17 +73,81 @@
         
         /*Execute the column chart*/ 
         OutputChart.draw(ColumnChartData, DesignChart);
+        /* End of drawChart function*/
       }
+      
+      /*When the code has been loaded, 
+       * Execute the function below to draw the bar chart*/
+      function drawChart2() {
+
+      /*Use the  Google library to create the visualization
+       *Make a data table with variable name Vietnamese Refugees who settled in Australia to tabulate the names*/
+        var ColumnChartData = new google.visualization.DataTable();
+        
+      /*Add a column of string type, labeled "Year" as the X-Axis represents the years of refugee intake from 1975-82
+       *Add a column of number type, labeled "Number of Vietnamese Refugees in Australia" as the Y-Axis 
+        which represents the number of refugees who came to Australia from 1975 to 1982 */
+        ColumnChartData.addColumn('string', 'Year');
+        ColumnChartData.addColumn('number', 'Number of Refugees');
+        
+      /*Add rows to the columns which contain the actual values of the string and number mentioned above 
+       *The rows is a list of lists, with each item int he list having the same number of elements as in the row,
+       * with matching data types as defined in the addColumn function defined above.
+       */
+        ColumnChartData.addRows([
+          ['1975', 1069], 
+          ['1976', 194], 
+          ['1977', 1490], 
+          ['1978', 7579], 
+          ['1979', 12392],
+          ['1980', 12588],
+          ['1981', 12245],
+          ['1982', 8154],
+        ]);
+
+        /*Customize the Column bar chart to add title, width and height*/
+        var DesignChart = {'title':'Number of Vietnamese Refugees in Australia',
+                       'width':500,
+                       'height':400,
+                       };
+
+        /* Create a variable that will call the data being fed in the columns and rows of the column chart */
+        var OutputChart = new google.visualization.ColumnChart(document.getElementById('ChartPlacement2'));
+        
+        /*Execute the column chart*/ 
+        OutputChart.draw(ColumnChartData, DesignChart);
+        /* End of drawChart function*/
+      }
+       
+      
      </script>					
 	</head>
 	
 	<body>
+		<div class="container-fluid">
+			
 		<!-- This is the name of the webpage created to list the resources for an assignment on Vietnamese refugees in China
 			The headline of the topic has been styled in font Bodoni HT Black with a size of 30px in red color-->	
 		<h1 class = "Topic"> Resources on Vietnamese Refugees in China </h1> 
-	
-		<!--Add a div under header to create space for the column chart -->	
-		<div id="ChartPlacement"> </div>
+		
+		<!-- Create a div to place the viz next to ech other --> 
+		<div class="row">
+			<!-- Create the first div of 6 columns for the first viz -->
+			<div class="col-md-6">
+
+				<!--Add a div under header to create space for the column chart -->
+				<div id="ChartPlacement"></div>
+				
+			</div>
+			
+			<div class="col-md-6">
+
+				<!--Add a div under header to create space for the second column chart -->
+				<div id="ChartPlacement2"></div>
+				
+			</div>
+
+			</div>
 		
 		<div>
 			<br> 
@@ -162,6 +236,8 @@
 		<script src="script.js" type="text/javascript"></script>
 		
 		<!-- Close body here -->
+		
+		</div>
 	</body>
 	<!--Close html-->
 </html>
