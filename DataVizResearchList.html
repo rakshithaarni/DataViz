@@ -9,7 +9,7 @@
 		<!--Use HTML tags to refer to the CSS written on another file named styles.css --> 
 		<link rel="stylesheet" href="style.css" />
 		
-		<!-- Latest compiled and minified CSS -->
+		<!-- USe Bootstrap to load the first code from Bootstrap CDN called "latest compiled and minified CSS" which can be found http://getbootstrap.com/getting-started/  -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		
@@ -18,40 +18,41 @@
    	 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
    		<script type="text/javascript">
 
-     	 /* Got to the google library and search for charts and execute "load". 
+     	 /* Go to the google library and search for charts and execute "load". 
      	  * This will load the "current" version of the Visualization API, and the corechart list in the package.*/
       	google.charts.load('current', {'packages':['corechart']});
 
       /*Since, the code being loaded takes time,
-       *This function is used to tell the page to only make teh chart once teh code loads completely.*/
+       *This function is used to tell the page to only make the charts once the code loads completely.*/
+      google.charts.setOnLoadCallback(ExecuteAllCharts);
       
-      google.charts.setOnLoadCallback(drawAllCharts);
-      
-      function drawAllCharts(){
-      	
-      	drawChart();
-      	drawChart2();
+      /*Use a function to create a unique variable name that encompasses both the charts to be drawn.
+       *This name appears in the setOnLoadCallback which means that Google will call both the charts at the same time
+       and execute the command
+       *Make sure both the names are unique*/
+      function ExecuteAllCharts(){
+      	ExecuteChart1_Australia();
+      	ExecuteChart2_GlobalResettlement();
       }
 
       /*When the code has been loaded, 
-       * Execute the function below to draw the bar chart*/
-      function drawChart() {
+       * Execute the function below to draw the first column chart*/
+      function ExecuteChart1_Australia() {
 
       /*Use the  Google library to create the visualization
-       *Make a data table with variable name Vietnamese Refugees who settled in Australia to tabulate the names*/
-        var ColumnChartData = new google.visualization.DataTable();
+       *Make a data table with a variable name for the data showing vietnamese refugees who settled in Australia*/
+        var ColumnChartData_Australia = new google.visualization.DataTable();
         
       /*Add a column of string type, labeled "Year" as the X-Axis represents the years of refugee intake from 1975-82
        *Add a column of number type, labeled "Number of Vietnamese Refugees in Australia" as the Y-Axis 
         which represents the number of refugees who came to Australia from 1975 to 1982 */
-        ColumnChartData.addColumn('string', 'Year');
-        ColumnChartData.addColumn('number', 'Number of Refugees');
+        ColumnChartData_Australia.addColumn('string', 'Year');
+        ColumnChartData_Australia.addColumn('number', 'Number of Refugees');
         
       /*Add rows to the columns which contain the actual values of the string and number mentioned above 
        *The rows is a list of lists, with each item int he list having the same number of elements as in the row,
-       * with matching data types as defined in the addColumn function defined above.
-       */
-        ColumnChartData.addRows([
+       * with matching data types as defined in the addColumn function defined above */
+        ColumnChartData_Australia.addRows([
           ['1975', 1069], 
           ['1976', 194], 
           ['1977', 1490], 
@@ -63,92 +64,96 @@
         ]);
 
         /*Customize the Column bar chart to add title, width and height*/
-        var DesignChart = {'title':'Number of Vietnamese Refugees in Australia',
+        var DesignChart_Australia = {'title':'Number of Vietnamese Refugees in Australia',
                        'width':500,
                        'height':400,
                        };
 
         /* Create a variable that will call the data being fed in the columns and rows of the column chart */
-        var OutputChart = new google.visualization.ColumnChart(document.getElementById('ChartPlacement'));
+        var OutputChart_Australia = new google.visualization.ColumnChart(document.getElementById('ChartPlacement_Australia'));
         
         /*Execute the column chart*/ 
-        OutputChart.draw(ColumnChartData, DesignChart);
+        OutputChart_Australia.draw(ColumnChartData_Australia, DesignChart_Australia);
         /* End of drawChart function*/
       }
       
       /*When the code has been loaded, 
-       * Execute the function below to draw the bar chart*/
-      function drawChart2() {
+       * Execute the function below to draw the second column chart*/
+      function ExecuteChart2_GlobalResettlement() {
 
       /*Use the  Google library to create the visualization
-       *Make a data table with variable name Vietnamese Refugees who settled in Australia to tabulate the names*/
-        var ColumnChartData = new google.visualization.DataTable();
+       *Make a data table with variable name which indicates the data for the number of resettlement of Vietnamese refugees
+       in host countries across the globe*/
+        var ColumnChartData_GlobalResettlement = new google.visualization.DataTable();
         
-      /*Add a column of string type, labeled "Year" as the X-Axis represents the years of refugee intake from 1975-82
-       *Add a column of number type, labeled "Number of Vietnamese Refugees in Australia" as the Y-Axis 
-        which represents the number of refugees who came to Australia from 1975 to 1982 */
-        ColumnChartData.addColumn('string', 'Year');
-        ColumnChartData.addColumn('number', 'Number of Refugees');
+      /*Add a column of string type, labeled "Countries" as the X-Axis represents the different countries that resettled refugees from 1975 to 2000
+       *Add a column of number type, labeled "Number of REsettlements" as the Y-Axis 
+        which represents the number of refugees who were resettled in different host countries across the globe from 1975 to 2000 */
+        ColumnChartData_GlobalResettlement.addColumn('string', 'Countries');
+        ColumnChartData_GlobalResettlement.addColumn('number', 'Number of Resettlements');
         
       /*Add rows to the columns which contain the actual values of the string and number mentioned above 
-       *The rows is a list of lists, with each item int he list having the same number of elements as in the row,
+       *The rows is a list of lists, with each item in the list having the same number of elements as in the row,
        * with matching data types as defined in the addColumn function defined above.
        */
-        ColumnChartData.addRows([
-          ['1975', 1069], 
-          ['1976', 194], 
-          ['1977', 1490], 
-          ['1978', 7579], 
-          ['1979', 12392],
-          ['1980', 12588],
-          ['1981', 12245],
-          ['1982', 8154],
+        ColumnChartData_GlobalResettlement.addRows([
+          ['China', 300000], 
+          ['Hong Kong', 67000], 
+          ['Third countries in ASEAN', 200000], 
+          ['Third countries in the West', 45000], 
         ]);
 
-        /*Customize the Column bar chart to add title, width and height*/
-        var DesignChart = {'title':'Number of Vietnamese Refugees in Australia',
+        /*Customize this column bar chart to add title, width and height*/
+        var DesignChart_GlobalResettlement = {'title':'Number of Vietnamese Resettled in Host Countries',
                        'width':500,
                        'height':400,
                        };
 
         /* Create a variable that will call the data being fed in the columns and rows of the column chart */
-        var OutputChart = new google.visualization.ColumnChart(document.getElementById('ChartPlacement2'));
+        var OutputChart_GlobalResettlement = new google.visualization.ColumnChart(document.getElementById('ChartPlacement_GlobalResettlement'));
         
         /*Execute the column chart*/ 
-        OutputChart.draw(ColumnChartData, DesignChart);
+        OutputChart_GlobalResettlement.draw(ColumnChartData_GlobalResettlement, DesignChart_GlobalResettlement);
         /* End of drawChart function*/
       }
        
-      
+     /*Close the script tag*/   
      </script>					
 	</head>
 	
 	<body>
+		<!-- Load the container fluid code from Bootstrap available at http://getbootstrap.com/css/ which
+			makes our webpage compatible to various platforms and formats including web and mobile-->
 		<div class="container-fluid">
 			
 		<!-- This is the name of the webpage created to list the resources for an assignment on Vietnamese refugees in China
 			The headline of the topic has been styled in font Bodoni HT Black with a size of 30px in red color-->	
 		<h1 class = "Topic"> Resources on Vietnamese Refugees in China </h1> 
 		
-		<!-- Create a div to place the viz next to ech other --> 
+		<!-- Load the row code from Bootstrap available at http://getbootstrap.com/css/ 
+			which will help to resize our first chart in a way that we can place it next to the second chart --> 
 		<div class="row">
-			<!-- Create the first div of 6 columns for the first viz -->
+			
+			<!-- Use the col-md code from Bootstrap available at http://getbootstrap.com/css/ 
+				to define the size of the first chart, which in this case is 6 columns -->
 			<div class="col-md-6">
-
-				<!--Add a div under header to create space for the column chart -->
-				<div id="ChartPlacement"></div>
-				
+				<!-- Place the first div for the chart into the div created using Bootstrap -->
+				<div id="ChartPlacement_Australia"></div>				
+			<!-- Close the div for the first chart -->	
 			</div>
 			
+			<!-- Use the col-md code from Bootstrap available at http://getbootstrap.com/css/ 
+				to define the size of the second chart, which in this case is 6 columns  -->
 			<div class="col-md-6">
-
-				<!--Add a div under header to create space for the second column chart -->
-				<div id="ChartPlacement2"></div>
-				
+				<!-- Place the first div for the chart into the div created using Bootstrap -->
+				<div id="ChartPlacement_GlobalResettlement"></div>				
+			<!--Close the div for the second chart -->	
 			</div>
 
+			<!-- Close the div for the div class=row -->
 			</div>
 		
+		<!-- Start a div for the first article -->
 		<div>
 			<br> 
 			<!-- Create a line break -->
@@ -235,9 +240,9 @@
 		<!-- Refactor Javascript to link it to a separate file that contains the Javascript code --> 
 		<script src="script.js" type="text/javascript"></script>
 		
-		<!-- Close body here -->
-		
+		<!-- Close container fluid div -->		
 		</div>
+		<!-- Close body here -->
 	</body>
 	<!--Close html-->
 </html>

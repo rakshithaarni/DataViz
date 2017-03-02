@@ -23,9 +23,15 @@ img {
 .ImgBorder {
 	width: 500px;
 }
-/*Define the properties of the div which will encompass the visualization*/
-#ChartDivProperties{
-	width: 1000px;
-	height: 700px;
+/*Define the properties of the div for the first chart*/
+#ChartPlacement_Australia{
+	width: 500px;
+	height: 400px;
+	color: #eeeeee;
+}
+/*Define the properties of the div for the second chart*/
+#ChartPlacement_GlobalResettlement{
+	width: 500px;
+	height: 400px;
 	color: #eeeeee;
 }
